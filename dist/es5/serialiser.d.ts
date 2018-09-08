@@ -1,2 +1,2 @@
-import * as serialiser$ from './serialiser';
+import * as serialiser$ from './serialiser/serialiser';
 export declare const serialiser: typeof serialiser$;
