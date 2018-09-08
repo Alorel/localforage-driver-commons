@@ -1,7 +1,9 @@
 import {bufferToString, deserialize, serialize, stringToBuffer} from './serialiser';
 
 export {clone} from './clone';
-export * from './types';
+export {getKeyPrefix} from './getKeyPrefix';
+export {LocalForageDbInstanceOptions, LocalForageOptions} from './types';
+
 export const serialiser = {
   bufferToString,
   deserialize,
