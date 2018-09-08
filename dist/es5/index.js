@@ -11,6 +11,8 @@ var getCallback_1 = require("./getCallback");
 exports.getCallback = getCallback_1.getCallback;
 var dropInstanceCommon_1 = require("./dropInstanceCommon");
 exports.dropInstanceCommon = dropInstanceCommon_1.dropInstanceCommon;
+var normaliseKey_1 = require("./normaliseKey");
+exports.normaliseKey = normaliseKey_1.normaliseKey;
 exports.serialiser = {
     bufferToString: serialiser_1.bufferToString,
     deserialize: serialiser_1.deserialize,

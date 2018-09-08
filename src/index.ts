@@ -6,6 +6,7 @@ export {executeCallback} from './executeCallback';
 export {LocalForageDbInstanceOptions, LocalForageOptions} from './types';
 export {getCallback} from './getCallback';
 export {dropInstanceCommon, DropInstanceCommonOutput} from './dropInstanceCommon';
+export {normaliseKey} from './normaliseKey';
 
 export const serialiser = {
   bufferToString,
