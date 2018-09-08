@@ -1,2 +1,3 @@
+import * as serialiser$ from './serialiser';
 export { clone } from './clone';
-export { stringToBuffer, bufferToString, deserialize, serialize } from './serialiser';
+export declare const serialiser: typeof serialiser$;
