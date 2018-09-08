@@ -5,6 +5,8 @@ var clone_1 = require("./clone");
 exports.clone = clone_1.clone;
 var getKeyPrefix_1 = require("./getKeyPrefix");
 exports.getKeyPrefix = getKeyPrefix_1.getKeyPrefix;
+var executeCallback_1 = require("./executeCallback");
+exports.executeCallback = executeCallback_1.executeCallback;
 exports.serialiser = {
     bufferToString: serialiser_1.bufferToString,
     deserialize: serialiser_1.deserialize,

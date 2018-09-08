@@ -2,6 +2,7 @@ import {bufferToString, deserialize, serialize, stringToBuffer} from './serialis
 
 export {clone} from './clone';
 export {getKeyPrefix} from './getKeyPrefix';
+export {executeCallback} from './executeCallback';
 export {LocalForageDbInstanceOptions, LocalForageOptions} from './types';
 
 export const serialiser = {
