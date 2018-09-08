@@ -1,7 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var tslib_1 = require("tslib");
-/** @internal */
 function clone(obj) {
     var e_1, _a;
     if (obj === null || typeof (obj) !== 'object' || 'isActiveClone' in obj) {

@@ -1,4 +1,3 @@
-/** @internal */
 export function clone<T>(obj: T): T {
   if (obj === null || typeof(obj) !== 'object' || 'isActiveClone' in obj) {
     return obj;
