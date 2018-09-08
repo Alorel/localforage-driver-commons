@@ -4,6 +4,7 @@ export {clone} from './clone';
 export {getKeyPrefix} from './getKeyPrefix';
 export {executeCallback} from './executeCallback';
 export {LocalForageDbInstanceOptions, LocalForageOptions} from './types';
+export {getCallback} from './getCallback';
 
 export const serialiser = {
   bufferToString,

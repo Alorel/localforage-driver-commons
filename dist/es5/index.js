@@ -7,6 +7,8 @@ var getKeyPrefix_1 = require("./getKeyPrefix");
 exports.getKeyPrefix = getKeyPrefix_1.getKeyPrefix;
 var executeCallback_1 = require("./executeCallback");
 exports.executeCallback = executeCallback_1.executeCallback;
+var getCallback_1 = require("./getCallback");
+exports.getCallback = getCallback_1.getCallback;
 exports.serialiser = {
     bufferToString: serialiser_1.bufferToString,
     deserialize: serialiser_1.deserialize,
