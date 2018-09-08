@@ -9,6 +9,8 @@ var executeCallback_1 = require("./executeCallback");
 exports.executeCallback = executeCallback_1.executeCallback;
 var getCallback_1 = require("./getCallback");
 exports.getCallback = getCallback_1.getCallback;
+var dropInstanceCommon_1 = require("./dropInstanceCommon");
+exports.dropInstanceCommon = dropInstanceCommon_1.dropInstanceCommon;
 exports.serialiser = {
     bufferToString: serialiser_1.bufferToString,
     deserialize: serialiser_1.deserialize,
