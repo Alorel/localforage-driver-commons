@@ -1,2 +1,3 @@
 # localforage-driver-commons
-common localforage driver ops
+
+Common functions for localforage drivers

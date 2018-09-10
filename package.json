@@ -13,15 +13,30 @@
     "prebuild:es5": "rimraf dist",
     "build:es5": "tsc",
     "watch:es5": "npm run build:es5 -- --watch",
-    "lint": "tslint -s ./node_modules/custom-tslint-formatters/formatters -t grouped -p ./tsconfig.json",
-    "lint:fix": "npm run lint -- --fix"
+    "lint": "tslint -s ./node_modules/custom-tslint-formatters/formatters -t grouped -p ./tsconfig.test.json",
+    "lint:fix": "npm run lint -- --fix",
+    "pretest": "rimraf coverage",
+    "test": "nyc mocha --opts ./mocha.opts",
+    "test:watch": "npm run test -- --watch"
   },
   "devDependencies": {
     "@alorel-personal/tslint-rules": "2.0.0",
+    "@types/chai": "~4.1.4",
+    "@types/lodash": "~4.14.116",
+    "@types/mocha": "~5.2.5",
+    "chai": "~4.1.2",
+    "concurrently": "~4.0.1",
     "custom-tslint-formatters": "~2.4.0",
     "localforage": "1.7.2",
+    "lodash": "~4.17.10",
+    "mocha": "~5.2.0",
+    "nyc": "~13.0.1",
     "rimraf": "~2.6.2",
+    "source-map-support": "~0.5.9",
+    "ts-node": "~7.0.1",
     "tslint": "~5.11.0",
-    "typescript": "~3.0.3"
+    "typescript": "~3.0.3",
+    "webpack": "~4.18.0",
+    "webpack-cli": "~3.1.0"
   }
 }
