@@ -11,8 +11,8 @@ install: yarn install --check-files
 
 script:
 - yarn run lint
-- yarn run build:esm5 --noEmit
 - if [[ $GH_TOKEN ]]; then yarn run build && semantic-release --dry-run --branch $TRAVIS_BRANCH; else yarn run build:esm5 --noEmit; fi;
+- yarn test
 
 after_script: if [[ $GH_TOKEN ]]; then greenkeeper-lockfile-upload; fi;
 
