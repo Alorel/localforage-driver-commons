@@ -5,6 +5,7 @@
   "main": "index.js",
   "types": "index.d.ts",
   "typings": "index.d.ts",
+  "module": "esm5/index.js",
   "esm5": "esm5/index.js",
   "esm2015": "esm2015/index.js",
   "fesm5": "esm5/index.js",
