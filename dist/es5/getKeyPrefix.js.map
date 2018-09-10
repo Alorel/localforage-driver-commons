@@ -1,1 +1,0 @@
-{"version":3,"file":"getKeyPrefix.js","sourceRoot":"","sources":["../../src/getKeyPrefix.ts"],"names":[],"mappings":";;AAEA,SAAgB,YAAY,CAAC,OAA2B,EAAE,aAAiC;IACzF,IAAI,SAAS,GAAM,OAAO,CAAC,IAAI,MAAG,CAAC;IAEnC,IAAI,OAAO,CAAC,SAAS,KAAK,aAAa,CAAC,SAAS,EAAE;QACjD,SAAS,IAAO,OAAO,CAAC,SAAS,MAAG,CAAC;KACtC;IAED,OAAO,SAAS,CAAC;AACnB,CAAC;AARD,oCAQC"}
