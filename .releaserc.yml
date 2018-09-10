@@ -11,8 +11,6 @@ prepare:
 - '@alorel-personal/semantic-release'
 - *npm
 - path: &exec '@semantic-release/exec'
-  cmd: yarn run doctoc
-- path: *exec
   cmd: alo copy-files
 - path: *exec
   cmd: alo clean-dist
