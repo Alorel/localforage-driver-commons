@@ -1,0 +1,7 @@
+/.idea/
+/node_modules/
+/yarn-error.log
+/coverage/
+/.nyc_output/
+/dist/
+/git_gpg_keys.asc
