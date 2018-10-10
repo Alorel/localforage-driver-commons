@@ -7,6 +7,7 @@ export interface DropInstanceCommonOutput {
   promise: Promise<string>;
 }
 
+//tslint:disable-next-line:no-ignored-initial-value
 export function dropInstanceCommon(this: any, options: any, callback?: any): DropInstanceCommonOutput {
   callback = getCallback.apply(this, arguments);
 
