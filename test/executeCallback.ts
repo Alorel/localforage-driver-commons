@@ -1,6 +1,8 @@
 import {expect} from 'chai';
 import {executeCallback} from '../src';
 
+//tslint:disable:no-use-of-empty-return-value
+
 describe('executeCallback', () => {
 
   it('should be a no-op without a callback', () => {
