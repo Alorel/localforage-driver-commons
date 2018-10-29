@@ -1,6 +1,6 @@
 {
   "name": "localforage-driver-commons",
-  "version": "0.0.0",
+  "version": "1.0.3",
   "description": "common localforage driver ops",
   "main": "index.js",
   "types": "index.d.ts",
