@@ -9,7 +9,7 @@ export interface DropInstanceCommonOutput {
 
 //tslint:disable-next-line:no-ignored-initial-value
 export function dropInstanceCommon(this: any, options: any, callback?: any): DropInstanceCommonOutput {
-  callback = getCallback.apply(this, arguments);
+  callback = getCallback.apply(this, <any>arguments);
 
   options = (typeof options !== 'function' && options) || {};
   if (!options.name) {
