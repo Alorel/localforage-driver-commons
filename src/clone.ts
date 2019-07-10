@@ -3,7 +3,7 @@ export function clone<T>(obj: T): T {
     return obj;
   }
 
-  const temp: any = obj instanceof Date ? new Date(<any>obj) : (obj.constructor());
+  const temp: any = obj instanceof Date ? new Date(<any>obj) : ((<any>obj).constructor());
 
   for (const key of Object.keys(obj)) {
     if (Object.prototype.hasOwnProperty.call(obj, key)) {
