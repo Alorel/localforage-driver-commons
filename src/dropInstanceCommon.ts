@@ -1,14 +1,23 @@
 import {getCallback} from './getCallback';
 import {getKeyPrefix} from './getKeyPrefix';
 
+/** Output of {@link dropInstanceCommon} */
 export interface DropInstanceCommonOutput {
   callback: any;
 
   promise: Promise<string>;
 }
 
-//tslint:disable-next-line:no-ignored-initial-value
-export function dropInstanceCommon(this: any, options: any, callback?: any): DropInstanceCommonOutput {
+/**
+ * Common operation of localforage's dropInstance
+ * @param options Operation options
+ * @param callback Callback, if provided
+ */
+export function dropInstanceCommon(
+  this: any,
+  options: any,
+  callback?: any //tslint:disable-line:no-ignored-initial-value
+): DropInstanceCommonOutput {
   callback = getCallback.apply(this, <any>arguments);
 
   options = (typeof options !== 'function' && options) || {};
