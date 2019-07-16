@@ -8,6 +8,7 @@ export {getCallback} from './getCallback';
 export {dropInstanceCommon, DropInstanceCommonOutput} from './dropInstanceCommon';
 export {normaliseKey} from './normaliseKey';
 
+/** DB entry serialiser */
 export const serialiser = {
   bufferToString,
   deserialize,

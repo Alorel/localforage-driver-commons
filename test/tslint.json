@@ -3,6 +3,7 @@
   "rules": {
     "no-unused-expression": false,
     "import-blacklist": false,
-    "no-void-expression": false
+    "no-void-expression": false,
+    "completed-docs": false
   }
 }
