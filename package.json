@@ -42,7 +42,7 @@
     "@semantic-release/git": "~7.0.3",
     "@types/chai": "~4.2.1",
     "@types/lodash": "~4.14.116",
-    "@types/mocha": "~5.2.5",
+    "@types/mocha": "~7.0.0",
     "chai": "~4.2.0",
     "localforage": "~1.7.3",
     "lodash": "~4.17.10",
