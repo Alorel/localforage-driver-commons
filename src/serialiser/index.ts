@@ -1,3 +1,7 @@
+/// <reference types="localforage" />
+
+/* eslint-disable */
+
 import {createBlob} from './createBlob';
 
 // Sadly, the best way to save binary data in WebSQL/localStorage is serializing
@@ -25,7 +29,6 @@ const BLOB_TYPE_PREFIX_REGEX = /^~~local_forage_type~([^~]+)~/;
 const SERIALIZED_MARKER_LENGTH = Consts.SERIALIZED_MARKER.length;
 const TYPE_SERIALIZED_MARKER_LENGTH = SERIALIZED_MARKER_LENGTH + Consts.TYPE_ARRAYBUFFER.length;
 
-//tslint:disable:no-magic-numbers no-bitwise prefer-switch no-unbound-method
 
 const toString = Object.prototype.toString;
 
@@ -45,10 +48,10 @@ export function stringToBuffer(serializedString: string): ArrayBuffer {
   const bytes = new Uint8Array(buffer);
 
   for (let i = 0, p = 0; i < len; i += 4) {
-    const encoded1 = Consts.BASE_CHARS.indexOf(serializedString[i]);
-    const encoded2 = Consts.BASE_CHARS.indexOf(serializedString[i + 1]);
-    const encoded3 = Consts.BASE_CHARS.indexOf(serializedString[i + 2]);
-    const encoded4 = Consts.BASE_CHARS.indexOf(serializedString[i + 3]);
+    const encoded1 = Consts.BASE_CHARS.indexOf(serializedString[i]!);
+    const encoded2 = Consts.BASE_CHARS.indexOf(serializedString[i + 1]!);
+    const encoded3 = Consts.BASE_CHARS.indexOf(serializedString[i + 2]!);
+    const encoded4 = Consts.BASE_CHARS.indexOf(serializedString[i + 3]!);
 
     bytes[p++] = (encoded1 << 2) | (encoded2 >> 4);
     bytes[p++] = ((encoded2 & 15) << 4) | (encoded3 >> 2);
@@ -68,22 +71,24 @@ export function bufferToString(buffer: ArrayBufferLike): string {
   let base64String = '';
 
   for (let i = 0; i < bytes.length; i += 3) {
-    /*jslint bitwise: true */
-    base64String += Consts.BASE_CHARS[bytes[i] >> 2];
-    base64String += Consts.BASE_CHARS[((bytes[i] & 3) << 4) | (bytes[i + 1] >> 4)];
+    /* jslint bitwise: true */
+    base64String += Consts.BASE_CHARS[bytes[i]! >> 2];
+    base64String += Consts.BASE_CHARS[((bytes[i]! & 3) << 4) | (bytes[i + 1]! >> 4)];
     base64String +=
-      Consts.BASE_CHARS[((bytes[i + 1] & 15) << 2) | (bytes[i + 2] >> 6)];
-    base64String += Consts.BASE_CHARS[bytes[i + 2] & 63];
+      Consts.BASE_CHARS[((bytes[i + 1]! & 15) << 2) | (bytes[i + 2]! >> 6)];
+    base64String += Consts.BASE_CHARS[bytes[i + 2]! & 63];
   }
 
   if (bytes.length % 3 === 2) {
-    base64String = base64String.substring(0, base64String.length - 1) + '=';
+    base64String = `${base64String.substring(0, base64String.length - 1)}=`;
   } else if (bytes.length % 3 === 1) {
-    base64String = base64String.substring(0, base64String.length - 2) + '==';
+    base64String = `${base64String.substring(0, base64String.length - 2)}==`;
   }
 
   return base64String;
 }
+
+type ValueIn<T> = T | ArrayBuffer | Blob;
 
 /**
  * Serialize a value, afterwards executing a callback (which usually
@@ -93,7 +98,7 @@ export function bufferToString(buffer: ArrayBufferLike): string {
  * @param callback
  */
 
-export function serialize(this: any, value: any, callback: any): void {
+export function serialize<T>(this: any, value: ValueIn<T>, callback: any): void {
   let valueType = '';
 
   if (value) {
@@ -103,7 +108,7 @@ export function serialize(this: any, value: any, callback: any): void {
   // Cannot use `value instanceof ArrayBuffer` or such here, as these
   // checks fail when running the tests using casper.js...
   if (value && (valueType === '[object ArrayBuffer]' ||
-    (value.buffer && toString.call(value.buffer) === '[object ArrayBuffer]'))) {
+    ((value as Uint8Array).buffer && toString.call((value as Uint8Array).buffer) === '[object ArrayBuffer]'))) {
     // Convert binary arrays to a string and prefix the string with
     // a special marker.
     let buffer: ArrayBufferLike;
@@ -113,7 +118,7 @@ export function serialize(this: any, value: any, callback: any): void {
       buffer = value;
       marker += Consts.TYPE_ARRAYBUFFER;
     } else {
-      buffer = value.buffer;
+      buffer = (value as unknown as Uint8Array).buffer;
 
       if (valueType === '[object Int8Array]') {
         marker += Consts.TYPE_INT8ARRAY;
@@ -145,13 +150,12 @@ export function serialize(this: any, value: any, callback: any): void {
 
     fileReader.onload = function () {
       // Backwards-compatible prefix for the blob type.
-      //tslint:disable-next-line:restrict-plus-operands
-      const str = `${Consts.BLOB_TYPE_PREFIX + value.type}~${bufferToString(<ArrayBufferLike>this.result)}`;
+      const str = `${Consts.BLOB_TYPE_PREFIX + (value as Blob).type}~${bufferToString(<ArrayBufferLike> this.result)}`;
 
       callback(Consts.SERIALIZED_MARKER + Consts.TYPE_BLOB + str);
     };
 
-    fileReader.readAsArrayBuffer(value);
+    fileReader.readAsArrayBuffer(value as Blob);
   } else {
     try {
       callback(JSON.stringify(value));
@@ -189,6 +193,7 @@ export function deserialize(value: string): any {
   const type = value.substring(SERIALIZED_MARKER_LENGTH, TYPE_SERIALIZED_MARKER_LENGTH);
 
   let blobType: any;
+
   // Backwards-compatible blob type serialization strategy.
   // DBs created with older versions of localForage will simply not have the blob type.
   if (type === Consts.TYPE_BLOB && BLOB_TYPE_PREFIX_REGEX.test(serializedString)) {
@@ -224,6 +229,30 @@ export function deserialize(value: string): any {
     case Consts.TYPE_FLOAT64ARRAY:
       return new Float64Array(buffer);
     default:
-      throw new Error('Unkown type: ' + type);
+      throw new Error(`Unkown type: ${type}`);
   }
 }
+
+/** Promise wrapper over {@link serialize} */
+export function serialisePromise(this: any, value: any): Promise<string> {
+  return new Promise<string>((resolve, reject) => {
+    serialize.call(this, value, (serialisedResultOrError: string | Error, maybeError: Error | null) => {
+      if (maybeError) {
+        reject(maybeError);
+      } else if (serialisedResultOrError instanceof Error) {
+        reject(serialisedResultOrError);
+      } else {
+        resolve(serialisedResultOrError);
+      }
+    });
+  });
+}
+
+const serialiser: LocalForageSerializer = {
+  bufferToString,
+  deserialize,
+  serialize,
+  stringToBuffer
+};
+
+export default serialiser;

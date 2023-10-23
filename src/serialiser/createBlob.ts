@@ -1,6 +1,11 @@
+/// <reference types="localforage" />
+
+/* eslint-disable */
+
 declare const BlobBuilder: any;
 declare const MozBlobBuilder: any;
 declare const WebKitBlobBuilder: any;
+declare const MSBlobBuilder: any;
 
 /**
  * Abstracts constructing a Blob object, so it also works in older
@@ -14,7 +19,6 @@ declare const WebKitBlobBuilder: any;
  * @param properties
  */
 export function createBlob(parts: any, properties: any): Blob {
-  /* global BlobBuilder,MSBlobBuilder,MozBlobBuilder,WebKitBlobBuilder */
   parts = parts || [];
   properties = properties || {};
   try {
@@ -24,10 +28,12 @@ export function createBlob(parts: any, properties: any): Blob {
       throw e;
     }
 
-    //tslint:disable-next-line:variable-name
-    const Builder: any = typeof BlobBuilder !== 'undefined' ? BlobBuilder
-      : typeof MSBlobBuilder !== 'undefined' ? MSBlobBuilder
-        : typeof MozBlobBuilder !== 'undefined' ? MozBlobBuilder
+    const Builder: any = typeof BlobBuilder !== 'undefined'
+      ? BlobBuilder
+      : typeof MSBlobBuilder !== 'undefined'
+        ? MSBlobBuilder
+        : typeof MozBlobBuilder !== 'undefined'
+          ? MozBlobBuilder
           : WebKitBlobBuilder;
 
     const builder = new Builder();

@@ -1,10 +1,17 @@
+/// <reference types="localforage" />
+
+export interface CallbackFn<T> {
+  (err: null | undefined | Error, value: T): void;
+}
+
+
 /**
  * Determine the callback argument from the list of arguments
- * @param _args Arguments to use
+ * @param args Arguments to use
  * @return Callback function or void
  */
-export function getCallback(..._args: any[]): any {
-  if (arguments.length && typeof arguments[arguments.length - 1] === 'function') {
-    return arguments[arguments.length - 1];
+export function getCallback<T>(args: any[]): CallbackFn<T> | undefined {
+  if (args.length && typeof args[args.length - 1] === 'function') {
+    return args[args.length - 1];
   }
 }

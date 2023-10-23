@@ -2,6 +2,6 @@
 
 Common functions for localforage drivers
 
-[![NpmVersion](https://img.shields.io/npm/v/localforage-driver-commons.svg?style=flat-square)](https://www.npmjs.com/package/localforage-driver-commons)
-[![Travis (.com) branch](https://img.shields.io/travis/com/Alorel/localforage-driver-commons/1.0.3.svg?style=flat-square)](https://travis-ci.com/Alorel/localforage-driver-commons)
-[![Greenkeeper badge](https://badges.greenkeeper.io/Alorel/localforage-driver-commons.svg)](https://greenkeeper.io/)
+[![MASTER CI status](https://github.com/Alorel/localforage-driver-commons/actions/workflows/core.yml/badge.svg)](https://github.com/Alorel/localforage-driver-commons/actions/workflows/core.yml?query=branch%3Amaster)
+[![NpmVersion](https://img.shields.io/npm/v/localforage-driver-commons.svg)](https://www.npmjs.com/package/localforage-driver-commons)
+[![dependencies badge](https://img.shields.io/librariesio/release/npm/localforage-driver-commons)](https://libraries.io/npm/localforage-driver-commons)
