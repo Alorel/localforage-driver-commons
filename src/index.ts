@@ -1,17 +1,16 @@
-import {bufferToString, deserialize, serialize, stringToBuffer} from './serialiser';
+/// <reference types="localforage" />
 
 export {clone} from './clone';
 export {getKeyPrefix} from './getKeyPrefix';
 export {executeCallback} from './executeCallback';
-export {LocalForageDbInstanceOptions, LocalForageOptions} from './types';
 export {getCallback} from './getCallback';
-export {dropInstanceCommon, DropInstanceCommonOutput} from './dropInstanceCommon';
+export type {CallbackFn} from './getCallback';
+export {dropInstanceCommon} from './dropInstanceCommon';
+export type {DropInstanceCommonOutput} from './dropInstanceCommon';
 export {normaliseKey} from './normaliseKey';
 
-/** DB entry serialiser */
-export const serialiser = {
-  bufferToString,
-  deserialize,
-  serialize,
-  stringToBuffer
-};
+export interface LocalForageExt extends LocalForage {
+
+  /** @private */
+  _defaultConfig: LocalForageOptions;
+}

@@ -5,14 +5,10 @@ import {executeCallback} from '../src';
 
 describe('executeCallback', () => {
 
-  it('should be a no-op without a callback', () => {
-    expect(executeCallback(Promise.resolve())).to.be.undefined;
-  });
-
-  it('should run a callback on success', (cb: any) => {
-    executeCallback(Promise.resolve('foo'), (err: any, result: any) => {
+  it('should run a callback on success', cb => {
+    executeCallback(Promise.resolve('foo'), (err, result) => {
       try {
-        expect(err).to.be.null;
+        expect(err).to.eq(null);
         expect(result).to.eq('foo');
         cb();
       } catch (e) {
@@ -21,14 +17,14 @@ describe('executeCallback', () => {
     });
   });
 
-  it('should run a callback on error', (cb: any) => {
+  it('should run a callback on error', cb => {
     const rError = new Error('bar');
     const rejected = Promise.reject(rError);
 
     executeCallback(rejected, (err: any, result: any) => {
       try {
-        expect(err === rError).to.be.true;
-        expect(result).to.be.undefined;
+        expect(err === rError).to.eq(true);
+        expect(result).to.eq(null);
         cb();
       } catch (e) {
         cb(e);

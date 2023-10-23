@@ -1,44 +1,43 @@
-import {getCallback} from './getCallback';
+/// <reference types="localforage" />
+
+import {type CallbackFn, getCallback} from './getCallback';
 import {getKeyPrefix} from './getKeyPrefix';
+import type {LocalForageExt} from './index';
 
 /** Output of {@link dropInstanceCommon} */
 export interface DropInstanceCommonOutput {
-  callback: any;
+  callback?: CallbackFn<string>;
 
   promise: Promise<string>;
 }
 
 /**
  * Common operation of localforage's dropInstance
- * @param options Operation options
- * @param callback Callback, if provided
+ * @param args `dropInstance` arguments
  */
 export function dropInstanceCommon(
-  this: any,
-  options: any,
-  callback?: any //tslint:disable-line:no-ignored-initial-value
+  this: LocalForage,
+  ...args: Parameters<LocalForageDropInstanceFn>
 ): DropInstanceCommonOutput {
-  callback = getCallback.apply(this, <any>arguments);
+  const resolvedCallback = getCallback(args);
+  const options: LocalForageDbInstanceOptions = args[0] ?? {};
 
-  options = (typeof options !== 'function' && options) || {};
   if (!options.name) {
     const currentConfig = this.config();
     options.name = options.name || currentConfig.name;
     options.storeName = options.storeName || currentConfig.storeName;
   }
 
-  let promise: Promise<string>;
-  if (!options.name) {
-    promise = Promise.reject('Invalid arguments');
-  } else {
-    promise = new Promise<string>(resolve => {
-      if (!options.storeName) {
-        resolve(`${options.name}/`);
-      } else {
-        resolve(getKeyPrefix(options, this._defaultConfig));
-      }
-    });
-  }
-
-  return {promise, callback};
+  return {
+    callback: resolvedCallback,
+    promise: options.name
+      ? new Promise<string>(resolve => {
+        if (options.storeName) {
+          resolve(getKeyPrefix(options, (this as LocalForageExt)._defaultConfig));
+        } else {
+          resolve(`${options.name}/`);
+        }
+      })
+      : Promise.reject(new Error('Invalid arguments'))
+  };
 }

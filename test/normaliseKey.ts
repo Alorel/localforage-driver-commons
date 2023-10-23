@@ -1,6 +1,9 @@
 import {expect} from 'chai';
-import {noop} from 'lodash';
 import {normaliseKey} from '../src';
+
+function noop() {
+  // nooping away, mate
+}
 
 describe('normaliseKey', () => {
   let origConsoleWarn: any;

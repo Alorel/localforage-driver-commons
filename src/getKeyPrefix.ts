@@ -1,4 +1,4 @@
-import {LocalForageOptions} from './types';
+/// <reference types="localforage" />
 
 /**
  * Get the prefix for the given key
